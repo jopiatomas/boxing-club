@@ -1,0 +1,83 @@
+import { PlaceholderVisual } from '../components/PlaceholderVisual'
+import { siteContent } from '../data/siteContent'
+
+export function HeroSection() {
+  const { hero } = siteContent
+
+  return (
+    <section id="inicio" className="relative overflow-hidden px-6 pb-20 pt-12 lg:px-10 lg:pb-24 lg:pt-20">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(143,194,255,0.18),_transparent_32%),radial-gradient(circle_at_bottom_right,_rgba(255,255,255,0.05),_transparent_28%)]" />
+
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[var(--color-accent)]">
+            {hero.eyebrow}
+          </p>
+
+          <h1 className="mt-6 max-w-4xl font-display text-6xl uppercase leading-[0.9] tracking-[0.08em] text-white md:text-7xl xl:text-[7rem]">
+            {hero.title}
+          </h1>
+
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-white/75">
+            {hero.description}
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-4">
+            <a
+              href="#contacto"
+              className="rounded-full border border-[var(--color-accent)] bg-[var(--color-accent)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-[var(--color-ink)] transition hover:bg-transparent hover:text-[var(--color-accent)]"
+            >
+              {hero.primaryCta}
+            </a>
+            <a
+              href="#programas"
+              className="rounded-full border border-white/15 px-6 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-white transition hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[var(--color-ink)]"
+            >
+              {hero.secondaryCta}
+            </a>
+          </div>
+
+          <div className="mt-10 flex flex-wrap gap-3">
+            {hero.badges.map((badge) => (
+              <span
+                key={badge}
+                className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.24em] text-white/70"
+              >
+                {badge}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid gap-6">
+          <PlaceholderVisual
+            label="Acá iría una imagen principal"
+            description="Pensado para una foto potente del ring, una clase o una sesión con foco cinematográfico."
+            tone="accent"
+            className="min-h-[340px]"
+          />
+
+          <div className="grid gap-6 md:grid-cols-2">
+            <PlaceholderVisual
+              label="Acá iría el logo"
+              description="Podés reemplazar este bloque por tu isotipo, escudo o firma visual."
+              className="min-h-[220px]"
+            />
+            <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6">
+              <p className="text-xs uppercase tracking-[0.28em] text-white/50">
+                Mensaje de marca
+              </p>
+              <p className="mt-6 font-display text-3xl uppercase tracking-[0.12em] text-white">
+                Entrenamiento con presencia.
+              </p>
+              <p className="mt-4 text-sm leading-7 text-white/70">
+                Este bloque replica el estilo de “callout” que suelen usar sitios
+                editoriales o deportivos para destacar una idea central.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

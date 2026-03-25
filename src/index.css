@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Bebas+Neue&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-sans: 'Barlow', sans-serif;
+
+  --color-ink: #071226;
+  --color-ink-soft: #10203d;
+  --color-paper: #f4f8ff;
+  --color-accent: #8fc2ff;
+  --color-accent-strong: #4d95ff;
+}
+
+:root {
+  font-family: var(--font-sans);
+  color: var(--color-paper);
+  background:
+    linear-gradient(180deg, rgba(143, 194, 255, 0.08), transparent 28%),
+    linear-gradient(135deg, #071226, #10203d 50%, #091425);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(143, 194, 255, 0.14), transparent 22%),
+    linear-gradient(180deg, #071226, #10203d 35%, #091425 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+#root {
+  min-height: 100vh;
+}
