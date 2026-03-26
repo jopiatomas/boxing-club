@@ -64,7 +64,8 @@ export function SiteHeader({ onNavigate }: SiteHeaderProps) {
               key={item.href}
               href={item.href}
               onNavigate={onNavigate}
-              className="text-sm uppercase tracking-[0.24em] text-white/70 transition hover:text-[var(--color-accent)]"
+              className="text-sm uppercase tracking-[0.24em] text-white/70 font-semibold transition
+  duration-200 hover:text-[var(--color-accent)] hover:scale-[1.03]"
             >
               {item.label}
             </AppLink>

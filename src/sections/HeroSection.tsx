@@ -50,12 +50,14 @@ export function HeroSection() {
         </div>
 
         <div className="grid gap-6">
-          <PlaceholderVisual
-            label="Acá iría una imagen principal"
-            description="Pensado para una foto potente del ring, una clase o una sesión con foco cinematográfico."
-            tone="accent"
-            className="min-h-[340px]"
-          />
+          <div className="relative min-h-[340px] overflow-hidden rounded-[2rem] border border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 shadow-[0_20px_60px_rgba(0,0,0,0.28)]">
+            <img
+              src="/gimnasio.jpeg"
+              alt="Foto principal del gimnasio"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,18,38,0.08),rgba(7,18,38,0.58))]" />
+          </div>
 
           <div className="grid gap-6 md:grid-cols-2">
             <PlaceholderVisual

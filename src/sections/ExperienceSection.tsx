@@ -1,9 +1,9 @@
-import { PlaceholderVisual } from '../components/PlaceholderVisual'
-import { SectionIntro } from '../components/SectionIntro'
-import { siteContent } from '../data/siteContent'
+import { PlaceholderVisual } from "../components/PlaceholderVisual";
+import { SectionIntro } from "../components/SectionIntro";
+import { siteContent } from "../data/siteContent";
 
 export function ExperienceSection() {
-  const { experience } = siteContent
+  const { experience } = siteContent;
 
   return (
     <section id="espacio" className="bg-black/20 px-6 py-24 lg:px-10">
@@ -35,5 +35,5 @@ export function ExperienceSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
