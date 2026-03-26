@@ -1,8 +1,8 @@
-import { SectionIntro } from '../components/SectionIntro'
-import { siteContent } from '../data/siteContent'
+import { SectionIntro } from "../components/SectionIntro";
+import { siteContent } from "../data/siteContent";
 
 export function ScheduleSection() {
-  const { schedule } = siteContent
+  const { schedule } = siteContent;
 
   return (
     <section id="horarios" className="px-6 py-24 lg:px-10">
@@ -18,20 +18,22 @@ export function ScheduleSection() {
         <div className="rounded-[2rem] border border-white/10 bg-white/5 p-4 md:p-6">
           {schedule.map((item) => (
             <div
-              key={item.day}
+              key={item.shift}
               className="grid gap-3 border-b border-white/10 px-4 py-5 last:border-b-0 md:grid-cols-[0.8fr_1fr_1.2fr] md:items-center"
             >
               <p className="font-display text-2xl uppercase tracking-[0.1em] text-white">
-                {item.day}
+                {item.shift}
               </p>
               <p className="text-sm uppercase tracking-[0.22em] text-[var(--color-accent)]">
                 {item.hours}
               </p>
-              <p className="text-sm leading-7 text-white/70">{item.focus}</p>
+              <p className="text-sm leading-7 text-white/70 font-bold">
+                {item.coach}
+              </p>
             </div>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }
