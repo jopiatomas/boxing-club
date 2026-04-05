@@ -10,7 +10,7 @@ export function ContactSection() {
         <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 md:p-10">
           <SectionIntro
             eyebrow="Contacto"
-            title="Dejá un cierre simple, directo y accionable."
+            title="No dudes en contactarnos!"
             description="El objetivo de esta sección es convertir visitas en consultas. Por eso hay pocos datos, alto contraste y dos columnas muy claras."
           />
 
@@ -31,13 +31,27 @@ export function ContactSection() {
               <p className="text-xs uppercase tracking-[0.28em] text-white/50">
                 WhatsApp / Teléfono
               </p>
-              <p className="mt-3 text-lg text-white">{contact.phone}</p>
+              <a
+                href={contact.phoneHref}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-3 inline-block text-lg text-white transition hover:text-[#d4a24c]"
+              >
+                {contact.phone}
+              </a>
             </div>
             <div>
               <p className="text-xs uppercase tracking-[0.28em] text-white/50">
-                Email
+                Instagram
               </p>
-              <p className="mt-3 text-lg text-white">{contact.email}</p>
+              <a
+                href={contact.instagramHref}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-3 inline-block text-lg text-white transition hover:text-[#d4a24c]"
+              >
+                {contact.instagram}
+              </a>
             </div>
           </div>
         </div>

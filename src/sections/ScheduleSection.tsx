@@ -10,7 +10,7 @@ export function ScheduleSection() {
         <div>
           <SectionIntro
             eyebrow="Horarios"
-            title="Una tabla simple para cambiar rápido cuando abras cupos."
+            title="Contamos con variedad de horarios."
             description="En lugar de una tabla HTML pesada, usé filas visuales con grid. Para una landing es más flexible y más fácil de estilizar con Tailwind."
           />
         </div>

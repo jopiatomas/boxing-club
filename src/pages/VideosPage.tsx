@@ -1,74 +1,84 @@
-import { useMemo, useState } from 'react'
-import { siteContent, type TrainingVideo } from '../data/siteContent'
+import { useMemo, useState } from "react";
+import { siteContent, type TrainingVideo } from "../data/siteContent";
 
-type TrainingType = TrainingVideo['trainingType']
+type TrainingType = TrainingVideo["trainingType"];
 
 type WeekGroup = {
-  key: string
-  label: string
-  videosByType: Record<TrainingType, TrainingVideo[]>
-  total: number
-}
+  key: string;
+  label: string;
+  videosByType: Record<TrainingType, TrainingVideo[]>;
+  total: number;
+};
 
 function parseContentDate(dateString: string) {
-  return new Date(`${dateString}T12:00:00`)
+  return new Date(`${dateString}T12:00:00`);
 }
 
 function formatVideoDate(dateString: string) {
-  return new Intl.DateTimeFormat('es-AR', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  }).format(parseContentDate(dateString))
+  return new Intl.DateTimeFormat("es-AR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(parseContentDate(dateString));
 }
 
 function getThumbnailUrl(youtubeId: string) {
-  return `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`
+  return `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`;
 }
 
 function getWeekStart(dateString: string) {
-  const date = parseContentDate(dateString)
-  const day = date.getDay()
-  const diff = day === 0 ? -6 : 1 - day
-  const monday = new Date(date)
-  monday.setDate(date.getDate() + diff)
-  monday.setHours(12, 0, 0, 0)
-  return monday
+  const date = parseContentDate(dateString);
+  const day = date.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  const monday = new Date(date);
+  monday.setDate(date.getDate() + diff);
+  monday.setHours(12, 0, 0, 0);
+  return monday;
 }
 
 function getWeekKey(dateString: string) {
-  return getWeekStart(dateString).toISOString().slice(0, 10)
+  return getWeekStart(dateString).toISOString().slice(0, 10);
 }
 
 function getWeekLabel(weekKey: string) {
-  const start = parseContentDate(weekKey)
-  const end = new Date(start)
-  end.setDate(start.getDate() + 6)
+  const start = parseContentDate(weekKey);
+  const end = new Date(start);
+  end.setDate(start.getDate() + 6);
 
-  const startDay = new Intl.DateTimeFormat('es-AR', { day: 'numeric' }).format(start)
-  const endDay = new Intl.DateTimeFormat('es-AR', { day: 'numeric' }).format(end)
-  const month = new Intl.DateTimeFormat('es-AR', { month: 'long' }).format(start)
+  const startDay = new Intl.DateTimeFormat("es-AR", { day: "numeric" }).format(
+    start,
+  );
+  const endDay = new Intl.DateTimeFormat("es-AR", { day: "numeric" }).format(
+    end,
+  );
+  const month = new Intl.DateTimeFormat("es-AR", { month: "long" }).format(
+    start,
+  );
 
   if (start.getMonth() === end.getMonth()) {
-    return `Semana del ${startDay} al ${endDay} de ${month}`
+    return `Semana del ${startDay} al ${endDay} de ${month}`;
   }
 
-  const endMonth = new Intl.DateTimeFormat('es-AR', { month: 'long' }).format(end)
-  return `Semana del ${startDay} de ${month} al ${endDay} de ${endMonth}`
+  const endMonth = new Intl.DateTimeFormat("es-AR", { month: "long" }).format(
+    end,
+  );
+  return `Semana del ${startDay} de ${month} al ${endDay} de ${endMonth}`;
 }
 
 function getTypeLabel(type: TrainingType) {
-  return type === 'entrenamiento' ? 'Entrenamiento' : 'Guanteo'
+  return type === "entrenamiento" ? "Entrenamiento" : "Guanteo";
 }
 
 function buildWeekGroups(videos: TrainingVideo[]) {
-  const weekMap = new Map<string, WeekGroup>()
+  const weekMap = new Map<string, WeekGroup>();
 
-  const sortedVideos = [...videos].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+  const sortedVideos = [...videos].sort((a, b) =>
+    b.publishedAt.localeCompare(a.publishedAt),
+  );
 
   sortedVideos.forEach((video) => {
-    const weekKey = getWeekKey(video.publishedAt)
-    const currentGroup = weekMap.get(weekKey)
+    const weekKey = getWeekKey(video.publishedAt);
+    const currentGroup = weekMap.get(weekKey);
 
     if (!currentGroup) {
       weekMap.set(weekKey, {
@@ -79,72 +89,57 @@ function buildWeekGroups(videos: TrainingVideo[]) {
           guanteo: [],
         },
         total: 0,
-      })
+      });
     }
 
-    const targetGroup = weekMap.get(weekKey)
+    const targetGroup = weekMap.get(weekKey);
 
     if (!targetGroup) {
-      return
+      return;
     }
 
-    targetGroup.videosByType[video.trainingType].push(video)
-    targetGroup.total += 1
-  })
+    targetGroup.videosByType[video.trainingType].push(video);
+    targetGroup.total += 1;
+  });
 
-  return Array.from(weekMap.values()).sort((a, b) => b.key.localeCompare(a.key))
+  return Array.from(weekMap.values()).sort((a, b) =>
+    b.key.localeCompare(a.key),
+  );
 }
 
 export function VideosPage() {
-  const { trainingVideos, videosPage } = siteContent
-  const [selectedWeek, setSelectedWeek] = useState('')
-  const [selectedType, setSelectedType] = useState<'todos' | TrainingType>('todos')
+  const { trainingVideos, videosPage } = siteContent;
+  const [selectedWeek, setSelectedWeek] = useState("");
+  const [selectedType, setSelectedType] = useState<"todos" | TrainingType>(
+    "todos",
+  );
 
-  const allWeekGroups = useMemo(() => buildWeekGroups(trainingVideos), [trainingVideos])
+  const allWeekGroups = useMemo(
+    () => buildWeekGroups(trainingVideos),
+    [trainingVideos],
+  );
   const availableWeeks = allWeekGroups.map((weekGroup) => ({
     key: weekGroup.key,
     label: weekGroup.label,
-  }))
+  }));
 
   const visibleVideos = trainingVideos.filter((video) => {
-    const matchesWeek = selectedWeek ? getWeekKey(video.publishedAt) === selectedWeek : true
-    const matchesType = selectedType === 'todos' ? true : video.trainingType === selectedType
-    return matchesWeek && matchesType
-  })
+    const matchesWeek = selectedWeek
+      ? getWeekKey(video.publishedAt) === selectedWeek
+      : true;
+    const matchesType =
+      selectedType === "todos" ? true : video.trainingType === selectedType;
+    return matchesWeek && matchesType;
+  });
 
-  const visibleWeekGroups = useMemo(() => buildWeekGroups(visibleVideos), [visibleVideos])
+  const visibleWeekGroups = useMemo(
+    () => buildWeekGroups(visibleVideos),
+    [visibleVideos],
+  );
 
   return (
     <main className="px-6 pb-24 pt-12 lg:px-10 lg:pb-28 lg:pt-16">
       <section className="mx-auto max-w-7xl">
-        <div className="grid gap-10 rounded-[2rem] border border-white/10 bg-[linear-gradient(145deg,rgba(143,194,255,0.12),rgba(255,255,255,0.03))] p-8 md:p-10 lg:grid-cols-[1fr_0.8fr]">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[var(--color-accent)]">
-              {videosPage.eyebrow}
-            </p>
-            <h1 className="mt-5 max-w-4xl font-display text-5xl uppercase leading-[0.92] tracking-[0.08em] text-white md:text-6xl">
-              {videosPage.title}
-            </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-white/75">
-              {videosPage.description}
-            </p>
-          </div>
-
-          <div className="rounded-[1.75rem] border border-[var(--color-accent)]/20 bg-[rgba(9,20,37,0.55)] p-6">
-            <p className="text-xs uppercase tracking-[0.28em] text-white/50">
-              Criterio recomendado
-            </p>
-            <p className="mt-5 font-display text-3xl uppercase tracking-[0.1em] text-white">
-              YouTube para publicar, tu app para ordenar.
-            </p>
-            <p className="mt-4 text-sm leading-7 text-white/70">
-              {videosPage.helper}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto mt-12 max-w-7xl">
         <div className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6">
           <div className="flex flex-col gap-8">
             <div>
@@ -164,11 +159,11 @@ export function VideosPage() {
                 <div className="mt-3 flex flex-wrap gap-3">
                   <button
                     type="button"
-                    onClick={() => setSelectedWeek('')}
+                    onClick={() => setSelectedWeek("")}
                     className={`rounded-full border px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] transition ${
-                      selectedWeek === ''
-                        ? 'border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-ink)]'
-                        : 'border-white/15 text-white/75 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]'
+                      selectedWeek === ""
+                        ? "border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-ink)]"
+                        : "border-white/15 text-white/75 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
                     }`}
                   >
                     Todas las semanas
@@ -181,8 +176,8 @@ export function VideosPage() {
                       onClick={() => setSelectedWeek(week.key)}
                       className={`rounded-full border px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] transition ${
                         selectedWeek === week.key
-                          ? 'border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-ink)]'
-                          : 'border-white/15 text-white/75 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]'
+                          ? "border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-ink)]"
+                          : "border-white/15 text-white/75 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
                       }`}
                     >
                       {week.label}
@@ -196,20 +191,22 @@ export function VideosPage() {
                   Tipo
                 </p>
                 <div className="mt-3 flex flex-wrap gap-3">
-                  {(['todos', 'entrenamiento', 'guanteo'] as const).map((type) => (
-                    <button
-                      key={type}
-                      type="button"
-                      onClick={() => setSelectedType(type)}
-                      className={`rounded-full border px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] transition ${
-                        selectedType === type
-                          ? 'border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-ink)]'
-                          : 'border-white/15 text-white/75 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]'
-                      }`}
-                    >
-                      {type === 'todos' ? 'Todos' : getTypeLabel(type)}
-                    </button>
-                  ))}
+                  {(["todos", "entrenamiento", "guanteo"] as const).map(
+                    (type) => (
+                      <button
+                        key={type}
+                        type="button"
+                        onClick={() => setSelectedType(type)}
+                        className={`rounded-full border px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] transition ${
+                          selectedType === type
+                            ? "border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-ink)]"
+                            : "border-white/15 text-white/75 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+                        }`}
+                      >
+                        {type === "todos" ? "Todos" : getTypeLabel(type)}
+                      </button>
+                    ),
+                  )}
                 </div>
               </div>
             </div>
@@ -217,7 +214,10 @@ export function VideosPage() {
         </div>
 
         <p className="mt-5 text-sm uppercase tracking-[0.22em] text-white/55">
-          {visibleVideos.length} videos {selectedWeek || selectedType !== 'todos' ? 'filtrados' : 'disponibles'}
+          {visibleVideos.length} videos{" "}
+          {selectedWeek || selectedType !== "todos"
+            ? "filtrados"
+            : "disponibles"}
         </p>
 
         <div className="mt-8 flex flex-col gap-8">
@@ -242,11 +242,11 @@ export function VideosPage() {
               </div>
 
               <div className="mt-6 flex flex-col gap-10">
-                {(['entrenamiento', 'guanteo'] as const).map((type) => {
-                  const videos = weekGroup.videosByType[type]
+                {(["entrenamiento", "guanteo"] as const).map((type) => {
+                  const videos = weekGroup.videosByType[type];
 
                   if (!videos.length) {
-                    return null
+                    return null;
                   }
 
                   return (
@@ -283,7 +283,9 @@ export function VideosPage() {
                               <div className="flex flex-wrap gap-3 text-xs uppercase tracking-[0.22em] text-white/55">
                                 <span>{video.category}</span>
                                 <span>{video.duration}</span>
-                                <span>{formatVideoDate(video.publishedAt)}</span>
+                                <span>
+                                  {formatVideoDate(video.publishedAt)}
+                                </span>
                               </div>
 
                               <h4 className="mt-4 font-display text-3xl uppercase tracking-[0.08em] text-white">
@@ -306,7 +308,7 @@ export function VideosPage() {
                         ))}
                       </div>
                     </div>
-                  )
+                  );
                 })}
               </div>
             </section>
@@ -325,5 +327,5 @@ export function VideosPage() {
         ) : null}
       </section>
     </main>
-  )
+  );
 }

@@ -41,7 +41,7 @@ export function SiteHeader({ onNavigate }: SiteHeaderProps) {
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[rgba(7,18,38,0.9)] backdrop-blur">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
         <AppLink
-          href="/#inicio"
+          href="/"
           onNavigate={onNavigate}
           className="flex items-center gap-3"
         >
