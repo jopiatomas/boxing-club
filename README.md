@@ -18,15 +18,21 @@ Piki Team provides a structured video library where content is automatically gro
 
 ## Screenshots
 
-> *(Add your images inside a `/screenshots` folder and update the paths below)*
-
 ### Home Page
 
-![Home](./screenshots/home.png)
+![Home](./screenshots/home1.png)
+
+### Contact Section
+
+![Home](./screenshots/home2.png)
+
+### Video Filters
+
+![Videos](./screenshots/home-videos.png)
 
 ### Video Library
 
-![Videos](./screenshots/videos.png)
+![Videos](./screenshots/home-videos2.png)
 
 ---
 
