@@ -1,9 +1,8 @@
-import { PlaceholderVisual } from '../components/PlaceholderVisual'
-import { SectionIntro } from '../components/SectionIntro'
-import { siteContent } from '../data/siteContent'
+import { SectionIntro } from "../components/SectionIntro";
+import { siteContent } from "../data/siteContent";
 
 export function ContactSection() {
-  const { contact } = siteContent
+  const { contact } = siteContent;
 
   return (
     <section id="contacto" className="px-6 py-24 lg:px-10">
@@ -43,12 +42,17 @@ export function ContactSection() {
           </div>
         </div>
 
-        <PlaceholderVisual
-          label="Acá iría un mapa, una foto de fachada o el logo"
-          description="Podés reemplazar este bloque por un mapa embebido, una imagen real o un formulario simple cuando quieras avanzar a una segunda versión."
-          className="min-h-full"
-        />
+        <div className="min-h-[320px] flex-1 overflow-hidden rounded-[1.5rem] border border-white/10">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1675.3323569420622!2d-57.569770341474936!3d-38.007323405957486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9584df00612b7091%3A0xc8fe06a0130c033b!2sGimnasio%20Pikiteam!5e0!3m2!1ses-419!2sar!4v1775363435721!5m2!1ses-419!2sar"
+            title="Mapa de Gimnasio Pikiteam"
+            className="h-full min-h-[320px] w-full border-0"
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
       </div>
     </section>
-  )
+  );
 }

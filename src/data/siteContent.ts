@@ -78,10 +78,11 @@ export type SiteContent = {
 
 export const siteContent: SiteContent = {
   navigation: [
-    { label: "Inicio", href: "/#inicio" },
-    { label: "Método", href: "/#metodo" },
-    { label: "Programas", href: "/#programas" },
+    { label: "Contacto", href: "/#contacto" },
     { label: "Horarios", href: "/#horarios" },
+    { label: "Inicio", href: "/#inicio" },
+    { label: "Entrenador", href: "/#metodo" },
+    { label: "Programas", href: "/#programas" },
     { label: "Espacio", href: "/#espacio" },
     { label: "Videos", href: "/videos" },
   ],
