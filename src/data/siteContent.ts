@@ -55,7 +55,7 @@ export const siteContent: SiteContent = {
     { label: "Espacio", href: "/#espacio" },
     { label: "Contacto", href: "/#contacto" },
     { label: "Horarios", href: "/#horarios" },
-    { label: "Entrenamientos", href: "/visita" },
+    { label: "Entrenamientos", href: "/#visita" },
     { label: "Videos", href: "/videos" },
   ],
   schedule: [
