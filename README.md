@@ -16,6 +16,12 @@ Piki Team provides a structured video library where content is automatically gro
 
 ---
 
+##  Live Demo
+
+https://pikiteam.vercel.app/
+
+---
+
 ## Screenshots
 
 ### Home Page
@@ -53,12 +59,6 @@ Piki Team provides a structured video library where content is automatically gro
 * TypeScript
 * Vite
 * Tailwind CSS 4
-
----
-
-##  Live Demo
-
-https://pikiteam.vercel.app/
 
 ---
 
