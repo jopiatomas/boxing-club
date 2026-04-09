@@ -1,4 +1,10 @@
-export function VisitSection() {
+import { AppLink } from "../components/AppLink";
+
+type VisitSectionProps = {
+  onNavigate: (href: string) => void;
+};
+
+export function VisitSection({ onNavigate }: VisitSectionProps) {
   return (
     <section id="visita" className="px-6 py-24 lg:px-10">
       <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03))] shadow-[0_18px_50px_rgba(0,0,0,0.18)]">
@@ -19,12 +25,13 @@ export function VisitSection() {
                 contenido del club.
               </p>
 
-              <a
+              <AppLink
                 href="/videos"
+                onNavigate={onNavigate}
                 className="mt-8 inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--color-accent)] bg-[var(--color-accent)] px-6 py-3 text-center text-sm font-semibold uppercase tracking-[0.22em] text-[var(--color-ink)] transition hover:bg-transparent hover:text-[var(--color-accent)]"
               >
                 Ir a sección videos
-              </a>
+              </AppLink>
             </div>
           </div>
 

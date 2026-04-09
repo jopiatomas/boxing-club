@@ -3,13 +3,17 @@ import { ExperienceSection } from "../sections/ExperienceSection";
 import { ScheduleSection } from "../sections/ScheduleSection";
 import { VisitSection } from "../sections/VisitSection";
 
-export function HomePage() {
+type HomePageProps = {
+  onNavigate: (href: string) => void;
+};
+
+export function HomePage({ onNavigate }: HomePageProps) {
   return (
     <main>
       <ExperienceSection />
       <ContactSection />
       <ScheduleSection />
-      <VisitSection />
+      <VisitSection onNavigate={onNavigate} />
     </main>
   );
 }

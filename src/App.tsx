@@ -94,7 +94,7 @@ function App() {
   return (
     <div className="min-h-screen bg-[var(--color-ink)] text-[var(--color-paper)]">
       <SiteHeader onNavigate={handleNavigate} />
-      {activePath === '/videos' ? <VideosPage /> : <HomePage />}
+      {activePath === '/videos' ? <VideosPage /> : <HomePage onNavigate={handleNavigate} />}
       <SiteFooter onNavigate={handleNavigate} />
     </div>
   )
