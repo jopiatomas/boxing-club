@@ -120,7 +120,7 @@ Example:
 ### Important rules
 
 * `publishedAt` must follow `YYYY-MM-DD` format
-* `trainingType` must be `"entrenamiento"` or `"guanteo"`
+* `trainingType` must be `"entrenamiento"`, `"guanteo"` or `"exhibicion"`
 * `youtubeId` must be the video ID, not the full YouTube URL
 
 ---

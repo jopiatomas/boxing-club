@@ -66,7 +66,15 @@ function getWeekLabel(weekKey: string) {
 }
 
 function getTypeLabel(type: TrainingType) {
-  return type === "entrenamiento" ? "Entrenamiento" : "Guanteo";
+  if (type === "entrenamiento") {
+    return "Entrenamiento";
+  }
+
+  if (type === "guanteo") {
+    return "Guanteo";
+  }
+
+  return "Exhibicion";
 }
 
 function buildWeekGroups(videos: TrainingVideo[]) {
@@ -87,6 +95,7 @@ function buildWeekGroups(videos: TrainingVideo[]) {
         videosByType: {
           entrenamiento: [],
           guanteo: [],
+          exhibicion: [],
         },
         total: 0,
       });
@@ -191,22 +200,22 @@ export function VideosPage() {
                   Tipo
                 </p>
                 <div className="mt-3 flex flex-wrap gap-3">
-                  {(["todos", "entrenamiento", "guanteo"] as const).map(
-                    (type) => (
-                      <button
-                        key={type}
-                        type="button"
-                        onClick={() => setSelectedType(type)}
-                        className={`rounded-full border px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] transition ${
-                          selectedType === type
-                            ? "border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-ink)]"
-                            : "border-white/15 text-white/75 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-                        }`}
-                      >
-                        {type === "todos" ? "Todos" : getTypeLabel(type)}
-                      </button>
-                    ),
-                  )}
+                  {(
+                    ["todos", "entrenamiento", "guanteo", "exhibicion"] as const
+                  ).map((type) => (
+                    <button
+                      key={type}
+                      type="button"
+                      onClick={() => setSelectedType(type)}
+                      className={`rounded-full border px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] transition ${
+                        selectedType === type
+                          ? "border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-ink)]"
+                          : "border-white/15 text-white/75 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+                      }`}
+                    >
+                      {type === "todos" ? "Todos" : getTypeLabel(type)}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
@@ -242,7 +251,8 @@ export function VideosPage() {
               </div>
 
               <div className="mt-6 flex flex-col gap-10">
-                {(["entrenamiento", "guanteo"] as const).map((type) => {
+                {(["entrenamiento", "guanteo", "exhibicion"] as const).map(
+                  (type) => {
                   const videos = weekGroup.videosByType[type];
 
                   if (!videos.length) {
@@ -309,7 +319,8 @@ export function VideosPage() {
                       </div>
                     </div>
                   );
-                })}
+                },
+                )}
               </div>
             </section>
           ))}

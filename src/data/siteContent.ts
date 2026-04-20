@@ -22,7 +22,7 @@ export type TrainingVideo = {
   publishedAt: string;
   duration: string;
   category: string;
-  trainingType: "entrenamiento" | "guanteo";
+  trainingType: "entrenamiento" | "guanteo" | "exhibicion";
 };
 
 export type SiteContent = {
@@ -75,26 +75,7 @@ export const siteContent: SiteContent = {
       coach: `"Piki" Delacroix`,
     },
   ],
-  experience: [
-    {
-      title: "Acá iría una imagen principal del gimnasio",
-      description:
-        "Usé un bloque grande para que después puedas poner una foto hero de la sala, el ring o una clase.",
-      tone: "accent",
-    },
-    {
-      title: "Acá iría una foto del equipo o entrenador",
-      description:
-        "Este bloque funciona bien para reforzar autoridad, mostrar coaching o destacar una historia.",
-      tone: "dark",
-    },
-    {
-      title: "Acá iría una foto de entrenamiento",
-      description:
-        "Pensado para sumar movimiento visual y bajar el tono institucional con algo más humano.",
-      tone: "dark",
-    },
-  ],
+  experience: [],
   contact: {
     address: "Rodriguez Peña 3755",
     phone: "223 504-4369",
@@ -117,9 +98,9 @@ export const siteContent: SiteContent = {
     title:
       "Biblioteca de sesiones para seguir el ritmo del club fuera del gimnasio.",
     description:
-      "La mejor estructura es usar YouTube como hosting y descubrimiento, pero guardar en tu app los metadatos de cada video. Así podés ordenarlos por semana, separar entrenamientos de guanteos y destacar contenido nuevo sin depender de la interfaz de YouTube.",
+      "La mejor estructura es usar YouTube como hosting y descubrimiento, pero guardar en tu app los metadatos de cada video. Así podés ordenarlos por semana, separar entrenamientos, guanteos y exhibiciones, y destacar contenido nuevo sin depender de la interfaz de YouTube.",
     helper:
-      "Agrupar por semana y tipo te da una lectura mucho más cercana a la rutina real del club. El usuario entiende rápido qué corresponde a trabajo técnico y qué corresponde a guanteo.",
+      "Agrupar por semana y tipo te da una lectura mucho más cercana a la rutina real del club. El usuario entiende rápido qué corresponde a trabajo técnico, qué corresponde a guanteo y qué corresponde a exhibición.",
   },
   trainingVideos: [
     {
@@ -274,6 +255,132 @@ export const siteContent: SiteContent = {
       duration: "2:05 min",
       category: "",
       trainingType: "guanteo",
+    },
+    {
+      title: "Exhibicion en San José",
+      description: "",
+      youtubeId: "P61dYmCg89o",
+      publishedAt: "2026-04-18",
+      duration: "1:27 min",
+      category: "",
+      trainingType: "exhibicion",
+    },
+    {
+      title: "Exhibicion en San José",
+      description: "",
+      youtubeId: "ZihdLHjhhto",
+      publishedAt: "2026-04-18",
+      duration: "1:37 min",
+      category: "",
+      trainingType: "exhibicion",
+    },
+    {
+      title: "Exhibicion en San José",
+      description: "",
+      youtubeId: "zkBuGh3in1g",
+      publishedAt: "2026-04-18",
+      duration: "1:28 min",
+      category: "",
+      trainingType: "exhibicion",
+    },
+    {
+      title: "Exhibicion en San José",
+      description: "",
+      youtubeId: "wOrSAZZ0MN0",
+      publishedAt: "2026-04-18",
+      duration: "1:33 min",
+      category: "",
+      trainingType: "exhibicion",
+    },
+    {
+      title: "Exhibicion en San José",
+      description: "",
+      youtubeId: "u1QfdplotGA",
+      publishedAt: "2026-04-18",
+      duration: "2:07 min",
+      category: "",
+      trainingType: "exhibicion",
+    },
+    {
+      title: "Exhibicion en San José",
+      description: "",
+      youtubeId: "iNRevSNE5pY",
+      publishedAt: "2026-04-18",
+      duration: "2:02 min",
+      category: "",
+      trainingType: "exhibicion",
+    },
+    {
+      title: "Exhibicion en San José",
+      description: "",
+      youtubeId: "Kn4OFxiTUu8",
+      publishedAt: "2026-04-18",
+      duration: "2:07 min",
+      category: "",
+      trainingType: "exhibicion",
+    },
+    {
+      title: "Exhibicion en San José",
+      description: "",
+      youtubeId: "7mERU5J8ZCY",
+      publishedAt: "2026-04-18",
+      duration: "1:32 min",
+      category: "",
+      trainingType: "exhibicion",
+    },
+    {
+      title: "Exhibicion en San José",
+      description: "",
+      youtubeId: "-xI406KvPf8",
+      publishedAt: "2026-04-18",
+      duration: "1:25 min",
+      category: "",
+      trainingType: "exhibicion",
+    },
+    {
+      title: "Exhibicion en San José",
+      description: "",
+      youtubeId: "s-9aHU268ko",
+      publishedAt: "2026-04-18",
+      duration: "1:27 min",
+      category: "",
+      trainingType: "exhibicion",
+    },
+    {
+      title: "Exhibicion en San José",
+      description: "",
+      youtubeId: "p4IARWS8eq8",
+      publishedAt: "2026-04-18",
+      duration: "0:24 min",
+      category: "",
+      trainingType: "exhibicion",
+    },
+    {
+      title: "Exhibicion en San José",
+      description: "",
+      youtubeId: "L1D6KYDTOZY",
+      publishedAt: "2026-04-18",
+      duration: "2:07 min",
+      category: "",
+      trainingType: "exhibicion",
+    },
+    {
+      title: "Exhibicion en San José",
+      description: "",
+      youtubeId: "9CRW9SXz-ns",
+      publishedAt: "2026-04-18",
+      duration: "2:09 min",
+      category: "",
+      trainingType: "exhibicion",
+    },
+    {
+      title: "Exhibicion en San José",
+      description: "",
+      youtubeId: "i3pOOQXoNFg",
+      publishedAt: "2026-04-18",
+      duration: "1:55 min",
+      category: "",
+      trainingType: "exhibicion",
     },
   ],
 };
