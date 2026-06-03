@@ -45,10 +45,11 @@ https://pikiteam.vercel.app/
 ## Features
 
 *  Gym landing page with schedule and contact information
-*  Video library organized automatically by calendar week
+*  Public video library organized automatically by calendar week
 *  Filtering by training type (sparring / training)
+*  Professor login with delete permissions
+*  YouTube-backed playback for published videos
 *  Fast and responsive UI powered by Vite
-*  Simple content management from a centralized file
 *  Clean and modern design with Tailwind CSS
 
 ---
@@ -97,38 +98,17 @@ Videos are automatically grouped by calendar week based on their `publishedAt` f
 
 ##  Adding New Videos
 
-To add a new video, update the `trainingVideos` array in:
+La carga de videos desde la app esta habilitada.
 
-```
-src/data/siteContent.ts
-```
-
-Example:
-
-```ts
-{
-  title: "Technical sparring",
-  description: "Rounds focused on distance and defense.",
-  youtubeId: "abc123",
-  publishedAt: "2026-04-10",
-  duration: "3 min",
-  category: "Sparring",
-  trainingType: "guanteo",
-}
-```
-
-### Important rules
-
-* `publishedAt` must follow `YYYY-MM-DD` format
-* `trainingType` must be `"entrenamiento"`, `"guanteo"` or `"exhibicion"`
-* `youtubeId` must be the video ID, not the full YouTube URL
+* Hay selector de archivos
+* Hay drag and drop
+* La pagina prepara una cola de subida antes de publicar
+* El profesor puede subir o borrar material existente
 
 ---
 
 ##  Future Improvements
 
-* User authentication
-* Upload videos directly from the app
 * Comments and likes system
 * Improved mobile experience
 

@@ -16,9 +16,9 @@ export function ScheduleSection() {
         </div>
 
         <div className="rounded-[2rem] border border-white/10 bg-white/5 p-4 md:p-6">
-          {schedule.map((item) => (
+          {schedule.map((item, index) => (
             <div
-              key={item.shift}
+              key={`${item.shift}-${item.hours}-${index}`}
               className="grid gap-3 border-b border-white/10 px-4 py-5 last:border-b-0 md:grid-cols-[0.8fr_1fr_1.2fr] md:items-center"
             >
               <p className="font-display text-2xl uppercase tracking-[0.1em] text-white">

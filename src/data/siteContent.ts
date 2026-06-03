@@ -65,8 +65,8 @@ export const siteContent: SiteContent = {
       coach: `"Piki" Delacroix`,
     },
     {
-      shift: "Tarde/Noche",
-      hours: "16:30 - 18:00",
+      shift: "Tarde",
+      hours: "16:30 - 18:00 / 18:00 - 19:30",
       coach: `"Piki" Delacroix`,
     },
     {
