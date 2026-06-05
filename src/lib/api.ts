@@ -67,7 +67,11 @@ type ApiErrorPayload = {
   details?: unknown
 }
 
-const rawApiBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim() || 'http://localhost:4000'
+const defaultApiBaseUrl = import.meta.env.PROD
+  ? 'https://boxing-club-api-v0q3.onrender.com'
+  : 'http://localhost:4000'
+
+const rawApiBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim() || defaultApiBaseUrl
 
 export const apiBaseUrl = rawApiBaseUrl.endsWith('/')
   ? rawApiBaseUrl.slice(0, -1)
