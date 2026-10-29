@@ -60,18 +60,28 @@ export const siteContent: SiteContent = {
   ],
   schedule: [
     {
-      shift: "Tarde",
-      hours: "15:00 - 16:30",
+      shift: "Mañana",
+      hours: "8:30 - 10:00",
+      coach: `Nacho`,
+    },
+    {
+      shift: "Mañana",
+      hours: "10:00 - 11:30",
       coach: `"Piki" Delacroix`,
     },
     {
       shift: "Tarde",
-      hours: "16:30 - 18:00 / 18:00 - 19:30",
-      coach: `"Piki" Delacroix`,
+      hours: "15:00 - 16:30",
+      coach: `"El Eze"`,
+    },
+    {
+      shift: "Tarde",
+      hours: "16:30 - 18:00",
+      coach: `Nestor`,
     },
     {
       shift: "Noche",
-      hours: "19:30 - 21:00",
+      hours: "18:00 - 19:30 / 19:30 - 21:00",
       coach: `"Piki" Delacroix`,
     },
   ],
