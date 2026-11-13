@@ -1,7 +1,8 @@
 import { ContactSection } from "../sections/ContactSection";
-import { ExperienceSection } from "../sections/ExperienceSection";
+import { HeroSection } from "../sections/HeroSection";
+import { LatestVideosSection } from "../sections/LatestVideosSection";
 import { ScheduleSection } from "../sections/ScheduleSection";
-import { VisitSection } from "../sections/VisitSection";
+import { SpaceSection } from "../sections/SpaceSection";
 
 type HomePageProps = {
   onNavigate: (href: string) => void;
@@ -9,11 +10,12 @@ type HomePageProps = {
 
 export function HomePage({ onNavigate }: HomePageProps) {
   return (
-    <main>
-      <ExperienceSection />
-      <ContactSection />
+    <main id="contenido" className="flex-1">
+      <HeroSection onNavigate={onNavigate} />
+      <LatestVideosSection onNavigate={onNavigate} />
       <ScheduleSection />
-      <VisitSection onNavigate={onNavigate} />
+      <SpaceSection />
+      <ContactSection />
     </main>
   );
 }

@@ -1,38 +1,42 @@
-import { SectionIntro } from "../components/SectionIntro";
+import { SectionHeading } from "../components/ui/SectionHeading";
 import { siteContent } from "../data/siteContent";
 
 export function ScheduleSection() {
   const { schedule } = siteContent;
 
   return (
-    <section id="horarios" className="px-6 py-24 lg:px-10">
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-        <div>
-          <SectionIntro
-            eyebrow="Horarios"
-            title="Contamos con variedad de horarios."
-            description="En lugar de una tabla HTML pesada, usé filas visuales con grid. Para una landing es más flexible y más fácil de estilizar con Tailwind."
-          />
-        </div>
+    <section id="horarios" aria-labelledby="titulo-horarios" className="bg-ink-950 py-16 md:py-24">
+      <div className="container-x grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <SectionHeading id="titulo-horarios" eyebrow="Horarios" title="Elegí tu turno">
+          Clases de lunes a viernes, a la mañana, a la tarde y a la noche.
+        </SectionHeading>
 
-        <div className="rounded-[2rem] border border-white/10 bg-white/5 p-4 md:p-6">
-          {schedule.map((item, index) => (
-            <div
-              key={`${item.shift}-${item.hours}-${index}`}
-              className="grid gap-3 border-b border-white/10 px-4 py-5 last:border-b-0 md:grid-cols-[0.8fr_1fr_1.2fr] md:items-center"
-            >
-              <p className="font-display text-2xl uppercase tracking-[0.1em] text-white">
-                {item.shift}
-              </p>
-              <p className="text-sm uppercase tracking-[0.22em] text-[var(--color-accent)]">
-                {item.hours}
-              </p>
-              <p className="text-sm leading-7 text-white/70 font-bold">
-                {item.coach}
-              </p>
-            </div>
-          ))}
-        </div>
+        <table className="block w-full border-collapse text-left md:table">
+          <caption className="sr-only">Turnos de entrenamiento y profesor a cargo</caption>
+          <thead className="sr-only md:not-sr-only">
+            <tr className="label text-subtle">
+              <th scope="col" className="pb-3 font-semibold md:pr-4">Turno</th>
+              <th scope="col" className="pb-3 font-semibold md:pr-4">Horario</th>
+              <th scope="col" className="pb-3 font-semibold">Profe</th>
+            </tr>
+          </thead>
+          <tbody className="block md:table-row-group">
+            {schedule.map((item, index) => (
+              <tr
+                key={`${item.shift}-${item.hours}-${index}`}
+                className="grid grid-cols-[auto_1fr] gap-x-4 border-t border-ink-700 py-4 md:table-row md:py-0"
+              >
+                <th scope="row" className="heading row-span-2 w-24 text-2xl font-normal text-paper md:w-auto md:py-5 md:pr-4">
+                  {item.shift}
+                </th>
+                <td className="font-condensed text-xl font-semibold tracking-wide text-celeste md:py-5 md:pr-4">
+                  {item.hours}
+                </td>
+                <td className="text-muted md:py-5">{item.coach}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </section>
   );
