@@ -1,3 +1,5 @@
+import type { TrainingType } from "../lib/api";
+
 export type NavigationItem = {
   label: string;
   href: string;
@@ -9,108 +11,40 @@ export type ScheduleItem = {
   coach: string;
 };
 
-export type ExperienceItem = {
-  title: string;
-  description: string;
-  tone: "accent" | "dark";
-};
-
-export type TrainingVideo = {
-  title: string;
-  description: string;
-  youtubeId: string;
-  publishedAt: string;
-  duration: string;
-  category: string;
-  trainingType: "entrenamiento" | "guanteo" | "exhibicion";
-};
-
-export type SiteContent = {
-  navigation: NavigationItem[];
-  schedule: ScheduleItem[];
-  experience: ExperienceItem[];
-  contact: {
-    address: string;
-    phone: string;
-    phoneHref: string;
-    instagram: string;
-    instagramHref: string;
-    hours: string;
-  };
-  footer: {
-    copy: string;
-    links: NavigationItem[];
-  };
-  videosPage: {
-    eyebrow: string;
-    title: string;
-    description: string;
-    helper: string;
-  };
-  trainingVideos: TrainingVideo[];
-};
-
-export const siteContent: SiteContent = {
+export const siteContent = {
   navigation: [
     { label: "Espacio", href: "/#espacio" },
-    { label: "Contacto", href: "/#contacto" },
     { label: "Horarios", href: "/#horarios" },
-    { label: "Entrenamientos", href: "/#visita" },
-    { label: "Videos", href: "/videos" },
-  ],
+    { label: "Contacto", href: "/#contacto" },
+  ] satisfies NavigationItem[],
   schedule: [
-    {
-      shift: "Mañana",
-      hours: "8:30 - 10:00",
-      coach: `Nacho`,
-    },
-    {
-      shift: "Mañana",
-      hours: "10:00 - 11:30",
-      coach: `"Piki" Delacroix`,
-    },
-    {
-      shift: "Tarde",
-      hours: "15:00 - 16:30",
-      coach: `"El Eze"`,
-    },
-    {
-      shift: "Tarde",
-      hours: "16:30 - 18:00",
-      coach: `Nestor`,
-    },
+    { shift: "Mañana", hours: "8:30 - 10:00", coach: `Nacho` },
+    { shift: "Mañana", hours: "10:00 - 11:30", coach: `"Piki" Delacroix` },
+    { shift: "Tarde", hours: "15:00 - 16:30", coach: `"El Eze"` },
+    { shift: "Tarde", hours: "16:30 - 18:00", coach: `Nestor` },
     {
       shift: "Noche",
       hours: "18:00 - 19:30 / 19:30 - 21:00",
       coach: `"Piki" Delacroix`,
     },
-  ],
-  experience: [],
+  ] satisfies ScheduleItem[],
   contact: {
     address: "Rodriguez Peña 3755",
+    city: "Mar del Plata",
+    mapsHref: "https://www.google.com/maps/search/?api=1&query=Gimnasio+Pikiteam+Rodriguez+Pe%C3%B1a+3755+Mar+del+Plata",
     phone: "223 504-4369",
     phoneHref: "https://wa.me/5492235044369",
     instagram: "@piki_team",
     instagramHref: "https://www.instagram.com/piki_team/",
     hours: "Lunes a viernes 15:00/16:30/18:00/19:30",
   },
-  footer: {
-    copy: "Todos los derechos reservados.",
-    links: [
-      { label: "Horarios", href: "/#horarios" },
-      { label: "Espacio", href: "/#espacio" },
-      { label: "Videos", href: "/videos" },
-      { label: "Contacto", href: "/#contacto" },
-    ],
-  },
-  videosPage: {
-    eyebrow: "Videos de entrenamiento",
-    title:
-      "Biblioteca de sesiones para seguir el ritmo del club fuera del gimnasio.",
-    description:
-      "La mejor estructura es usar YouTube como hosting y descubrimiento, pero guardar en tu app los metadatos de cada video. Así podés ordenarlos por semana, separar entrenamientos, guanteos y exhibiciones, y destacar contenido nuevo sin depender de la interfaz de YouTube.",
-    helper:
-      "Agrupar por semana y tipo te da una lectura mucho más cercana a la rutina real del club. El usuario entiende rápido qué corresponde a trabajo técnico, qué corresponde a guanteo y qué corresponde a exhibición.",
-  },
-  trainingVideos: [],
+  motto: "Borrá de tu mente el “no puedo”",
 };
+
+export const trainingTypeLabels: Record<TrainingType, string> = {
+  entrenamiento: "Entrenamiento",
+  guanteo: "Guanteo",
+  exhibicion: "Exhibición",
+};
+
+export const trainingTypeOrder: TrainingType[] = ["entrenamiento", "guanteo", "exhibicion"];

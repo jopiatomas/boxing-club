@@ -1,38 +1,68 @@
-import { siteContent } from '../data/siteContent'
-import { AppLink } from './AppLink'
+import { siteContent } from "../data/siteContent";
+import { AppLink } from "./AppLink";
+import { Logo } from "./Logo";
+import { Icon } from "./ui/Icon";
 
 type SiteFooterProps = {
-  onNavigate: (href: string) => void
-}
+  onNavigate: (href: string) => void;
+};
 
 export function SiteFooter({ onNavigate }: SiteFooterProps) {
-  const { footer } = siteContent
+  const { contact, navigation } = siteContent;
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/10 bg-black/35">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-6 py-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
-        <div>
-          <p className="font-display text-2xl uppercase tracking-[0.2em] text-white">
-            Piki Team
-          </p>
-          <p className="mt-2 max-w-xl text-sm text-white/65">
-            {footer.copy}
-          </p>
+    <footer className="mt-auto bg-ink-950">
+      <div className="ropes" aria-hidden="true">
+        <span />
+      </div>
+      <div className="container-x grid gap-10 py-12 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="flex items-start gap-4">
+          <Logo size={64} className="h-16 w-auto" />
+          <div>
+            <p className="heading text-3xl text-paper">Piki Team</p>
+            <p className="mt-1 text-muted">
+              Gimnasio de boxeo · {contact.city}
+            </p>
+            <p className="label mt-4 text-cream">{siteContent.motto}</p>
+          </div>
         </div>
 
-        <div className="flex flex-wrap gap-4 text-xs uppercase tracking-[0.24em] text-white/60">
-          {footer.links.map((item) => (
-            <AppLink
-              key={item.href}
-              href={item.href}
-              onNavigate={onNavigate}
-              className="transition hover:text-[var(--color-accent)]"
-            >
-              {item.label}
-            </AppLink>
-          ))}
+        <nav aria-label="Pie de página">
+          <p className="label text-subtle">Secciones</p>
+          <ul className="mt-3 grid gap-2">
+            {[...navigation, { label: "Videos", href: "/videos" }].map((item) => (
+              <li key={item.href}>
+                <AppLink href={item.href} onNavigate={onNavigate} className="text-muted transition-colors hover:text-celeste">
+                  {item.label}
+                </AppLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div>
+          <p className="label text-subtle">Contacto</p>
+          <ul className="mt-3 grid gap-2 text-muted">
+            <li>
+              <a href={contact.phoneHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 transition-colors hover:text-celeste">
+                <Icon name="whatsapp" size={18} /> {contact.phone}
+              </a>
+            </li>
+            <li>
+              <a href={contact.instagramHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 transition-colors hover:text-celeste">
+                <Icon name="instagram" size={18} /> {contact.instagram}
+              </a>
+            </li>
+            <li className="inline-flex items-center gap-2">
+              <Icon name="pin" size={18} /> {contact.address}
+            </li>
+          </ul>
         </div>
       </div>
+      <div className="border-t border-ink-800">
+        <p className="container-x py-5 text-sm text-subtle">© {year} Piki Team. Todos los derechos reservados.</p>
+      </div>
     </footer>
-  )
+  );
 }

@@ -91,12 +91,22 @@ function App() {
 
   const activePath = locationState.path === '/videos' ? '/videos' : '/'
 
+  useEffect(() => {
+    document.title =
+      activePath === '/videos'
+        ? 'Videos · Piki Team'
+        : 'Piki Team · Gimnasio de boxeo en Mar del Plata'
+  }, [activePath])
+
   return (
-    <div className="min-h-screen bg-[var(--color-ink)] text-[var(--color-paper)]">
-      <SiteHeader onNavigate={handleNavigate} />
+    <>
+      <a href="#contenido" className="skip-link">
+        Saltar al contenido
+      </a>
+      <SiteHeader activePath={activePath} onNavigate={handleNavigate} />
       {activePath === '/videos' ? <VideosPage /> : <HomePage onNavigate={handleNavigate} />}
       <SiteFooter onNavigate={handleNavigate} />
-    </div>
+    </>
   )
 }
 

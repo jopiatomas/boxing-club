@@ -7,7 +7,6 @@ import {
   type DragEvent,
   type FormEvent,
 } from "react";
-import { siteContent } from "../data/siteContent";
 import {
   getCurrentUser,
   listVideos,
@@ -706,7 +705,6 @@ export function VideosPage() {
     }
   }
 
-  const videosPage = siteContent.videosPage;
 
   return (
     <main className="px-6 pb-24 pt-12 lg:px-10 lg:pb-28 lg:pt-16">
@@ -778,7 +776,7 @@ export function VideosPage() {
           <div className="relative grid gap-8 xl:grid-cols-[1.15fr_0.85fr] xl:items-start">
             <div>
               <p className="text-xs uppercase tracking-[0.35em] text-[var(--color-accent)]">
-                {videosPage.eyebrow}
+                Videos de entrenamiento
               </p>
               <h1 className="mt-4 max-w-3xl font-display text-5xl uppercase tracking-[0.08em] text-white md:text-6xl xl:text-7xl">
                 Biblioteca abierta.
