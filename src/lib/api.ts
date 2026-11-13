@@ -159,7 +159,25 @@ export function listVideos() {
   return request<VideosResponse>('/api/videos')
 }
 
-export function uploadVideo(token: string, input: VideoUploadInput) {
+export type UploadProgress = {
+  loaded: number
+  total: number
+}
+
+type UploadOptions = {
+  /** Progreso del envío del archivo al servidor (navegador → API). */
+  onProgress?: (progress: UploadProgress) => void
+  /** Se llama cuando el archivo terminó de enviarse y el servidor lo está pasando a YouTube. */
+  onSent?: () => void
+}
+
+/**
+ * POST /api/videos (multipart). Mismo contrato que antes: campos `video`, `title`,
+ * `description`, `category`, `trainingType`, `publishedAt` y `durationLabel` opcional,
+ * con `Authorization: Bearer`. Usa XMLHttpRequest en lugar de fetch solo para poder
+ * informar el progreso de subida.
+ */
+export function uploadVideo(token: string, input: VideoUploadInput, options: UploadOptions = {}) {
   const formData = new FormData()
 
   formData.append('video', input.file)
@@ -173,14 +191,53 @@ export function uploadVideo(token: string, input: VideoUploadInput) {
     formData.append('durationLabel', input.durationLabel.trim())
   }
 
-  return request<VideoResponse>(
-    '/api/videos',
-    {
-      method: 'POST',
-      body: formData,
-    },
-    token,
-  )
+  return new Promise<VideoResponse>((resolve, reject) => {
+    const xhr = new XMLHttpRequest()
+
+    xhr.open('POST', buildApiUrl('/api/videos'))
+    xhr.setRequestHeader('Accept', 'application/json')
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
+    xhr.upload.onprogress = (event) => {
+      if (event.lengthComputable) {
+        options.onProgress?.({ loaded: event.loaded, total: event.total })
+      }
+    }
+    xhr.upload.onload = () => options.onSent?.()
+
+    xhr.onload = () => {
+      const contentType = xhr.getResponseHeader('content-type') || ''
+      let payload: unknown = xhr.responseText
+
+      if (contentType.includes('application/json')) {
+        try {
+          payload = JSON.parse(xhr.responseText)
+        } catch {
+          payload = undefined
+        }
+      }
+
+      if (xhr.status >= 200 && xhr.status < 300) {
+        resolve(payload as VideoResponse)
+        return
+      }
+
+      const apiPayload = typeof payload === 'object' && payload ? (payload as ApiErrorPayload & { error?: string }) : undefined
+      reject(
+        new ApiError(
+          xhr.status,
+          apiPayload?.message || (typeof payload === 'string' && payload) || 'Ocurrio un error al conectar con la API',
+          // En los 500 de subida el back manda el detalle de YouTube en `error`
+          apiPayload?.details ?? apiPayload?.error,
+        ),
+      )
+    }
+
+    xhr.onerror = () => reject(new ApiError(0, 'Sin conexion con el servidor'))
+    xhr.onabort = () => reject(new ApiError(0, 'La subida se cancelo'))
+
+    xhr.send(formData)
+  })
 }
 
 export function removeVideo(token: string, videoId: string) {
