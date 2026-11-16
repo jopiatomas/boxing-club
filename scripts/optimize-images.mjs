@@ -32,7 +32,7 @@ async function run() {
     console.log('✓', path.relative(root, fallback))
   }
 
-  const logo = path.join(publicDir, 'logo.png')
+  const logo = path.join(publicDir, 'logo3.PNG')
   for (const size of [96, 192]) {
     await sharp(logo).resize({ height: size }).webp({ quality: 85 }).toFile(path.join(outDir, `logo-${size}.webp`))
     await sharp(logo).resize({ height: size }).png({ compressionLevel: 9 }).toFile(path.join(outDir, `logo-${size}.png`))

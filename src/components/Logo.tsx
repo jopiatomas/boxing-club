@@ -10,7 +10,7 @@ export function Logo({ size = 44, className = '' }: LogoProps) {
       <img
         src="/img/logo-96.png"
         alt=""
-        width={Math.round(size * (702 / 812))}
+        width={size}
         height={size}
         className={className}
       />
