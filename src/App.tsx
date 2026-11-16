@@ -2,7 +2,29 @@ import { useEffect, useState } from 'react'
 import { SiteFooter } from './components/SiteFooter'
 import { SiteHeader } from './components/SiteHeader'
 import { HomePage } from './pages/HomePage'
+import { PrivacyPage } from './pages/PrivacyPage'
 import { VideosPage } from './pages/VideosPage'
+
+const routes = [
+  {
+    path: '/',
+    title: 'Piki Team · Gimnasio de boxeo en Mar del Plata',
+    description:
+      'Gimnasio de boxeo Piki Team en Mar del Plata. Horarios, contacto y videos de entrenamiento y guanteo del club.',
+  },
+  {
+    path: '/videos',
+    title: 'Videos · Piki Team',
+    description:
+      'Videos de entrenamiento, guanteo y exhibiciones del gimnasio de boxeo Piki Team en Mar del Plata.',
+  },
+  {
+    path: '/privacidad',
+    title: 'Política de privacidad · Piki Team',
+    description:
+      'Qué datos maneja el sitio de Piki Team, cómo usamos la API de YouTube y cómo ejercer tus derechos según la Ley 25.326.',
+  },
+]
 
 type LocationState = {
   path: string
@@ -89,14 +111,17 @@ function App() {
     window.dispatchEvent(new Event('locationchange'))
   }
 
-  const activePath = locationState.path === '/videos' ? '/videos' : '/'
+  const activePath = routes.some((route) => route.path === locationState.path)
+    ? locationState.path
+    : '/'
+  const route = routes.find((item) => item.path === activePath) ?? routes[0]
 
   useEffect(() => {
-    document.title =
-      activePath === '/videos'
-        ? 'Videos · Piki Team'
-        : 'Piki Team · Gimnasio de boxeo en Mar del Plata'
-  }, [activePath])
+    document.title = route.title
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute('content', route.description)
+  }, [route])
 
   return (
     <>
@@ -104,7 +129,13 @@ function App() {
         Saltar al contenido
       </a>
       <SiteHeader activePath={activePath} onNavigate={handleNavigate} />
-      {activePath === '/videos' ? <VideosPage /> : <HomePage onNavigate={handleNavigate} />}
+      {activePath === '/videos' ? (
+        <VideosPage />
+      ) : activePath === '/privacidad' ? (
+        <PrivacyPage />
+      ) : (
+        <HomePage onNavigate={handleNavigate} />
+      )}
       <SiteFooter onNavigate={handleNavigate} />
     </>
   )

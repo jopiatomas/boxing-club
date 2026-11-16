@@ -61,7 +61,12 @@ export function SiteFooter({ onNavigate }: SiteFooterProps) {
         </div>
       </div>
       <div className="border-t border-ink-800">
-        <p className="container-x py-5 text-sm text-subtle">© {year} Piki Team. Todos los derechos reservados.</p>
+        <div className="container-x flex flex-col gap-2 py-5 text-sm text-subtle sm:flex-row sm:items-center sm:justify-between">
+          <p>© {year} Piki Team. Todos los derechos reservados.</p>
+          <AppLink href="/privacidad" onNavigate={onNavigate} className="underline-offset-4 transition-colors hover:text-celeste hover:underline">
+            Política de privacidad
+          </AppLink>
+        </div>
       </div>
     </footer>
   );
